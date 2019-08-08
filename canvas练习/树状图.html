@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+        var data = [
+            {
+                name: '吴彦祖',
+                grade: 40
+            },
+            {
+                name: '彭于晏',
+                grade: 80
+            },
+            {
+                name: '李现',
+                grade: 93
+            },
+            {
+                name: '王蕾',
+                grade: 22
+            },
+            {
+                name: '周嘉庚',
+                grade: 100
+            },
+            {
+                name: '闫树茂',
+                grade: 1
+            },
+        ];
+
+        var canvas = document.createElement("canvas");
+
+        canvas.width = 500;
+        canvas.height = 500;
+        canvas.style.border = "1px solid black";
+        document.body.appendChild(canvas);
+
+        var ctx = canvas.getContext("2d");
+
+
+        ctx.translate(50, 450);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -400);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(400, 0);
+        ctx.stroke();
+
+
+        var max = JSON.parse(JSON.stringify(data)).sort((a,b)=>b.grade-a.grade)[0].grade;
+
+        var colorArr=data.map(function(){
+            return randColor();
+        })
+
+
+            
+
+        ctx.save();
+        ctx.textAlign="end";
+        ctx.textBaseline="middle";
+        for(var i = 50;i<=400;i+=50){
+            ctx.beginPath();
+            ctx.moveTo(-3,-i);
+            ctx.lineTo(3,-i);
+            ctx.stroke();
+            ctx.fillText((i/400)*100,-3,-i);
+        }
+        ctx.restore();
+
+
+
+        var margin = 400/(data.length+1);
+
+
+        ctx.save();
+        ctx.textAlign = "center";
+
+        for(var i = 0; i <data.length; i++){
+
+            ctx.fillStyle = colorArr[i];
+            var h = data[i].grade/100*400;
+            ctx.beginPath();
+            ctx.rect(margin*(i+1)-10,0,20,-h);
+            ctx.fill();
+
+
+            ctx.fillText(data[i].name,margin*(i+1),15)
+        }
+
+
+        ctx.restore();
+
+
+        canvas.addEventListener("mousemove", function () {
+            ctx.clearRect(-50, -450, 500, 500);
+            // draw(e);
+        });
+
+
+        function randColor() {
+            return `rgba(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},.8)`
+        }
+
+
+     
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var canvas = document.createElement("canvas");
+
+    canvas.width = 500;
+    canvas.height = 500;
+    canvas.style.border = "1px solid black";
+    document.body.appendChild(canvas);
+
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = 'orange';
+    ctx.strokeStyle = 'orange';
+
+
+   for (var i = 0; i <= 10; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * 50, 0);
+    ctx.lineTo(i * 50, 500);
+    ctx.moveTo(0, i * 50);
+    ctx.lineTo(500, i * 50);
+    ctx.stroke();
+
+}
+//   ctx.beginPath();
+//     // 左上角
+//     ctx.moveTo(200, 200);
+//     // 右上角
+//     ctx.lineTo(300, 200);
+//     // 右下角
+//     ctx.lineTo(300, 300);
+//     // 左下角
+//     ctx.lineTo(200, 300);
+//     ctx.closePath();
+//     ctx.stroke();
+//     ctx.fill();
+
+
+</script>
+</body>
+</html>
