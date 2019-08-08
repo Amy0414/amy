@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./fonts1/iconfont.css">
+</head>
+<body>
+<!-- 大容器 -->
+    <div class="swiper-container">
+        <!-- 图片容器 -->
+        <div class="swiper-wrapper">
+            <!-- 每一张图片 -->
+            <div class="swiper-slide"><img src="./images/1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/4.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="./images/5.jpg" alt=""></div>
+        </div>
+        <div class="swiper-pages">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="prev-btn "><</div>
+        <div class="next-btn">></div>
+    </div>
+    
+    <script>
+
+    //封装函数 私有
+    function Swiper(container){
+        this.container = document.querySelector(container);//容器
+
+        this.wrapper = this.container.querySelector(".swiper-wrapper");//图片容器
+
+        this.cWidth = this.container.clientWidth;
+        console.log(this.cWidth);
+
+        this.initSwiper();
+    }
+   Swiper.prototype = {
+       container:Swiper,
+       initSwiper(){
+
+           var childs = this.wrapper.children;
+           var lastIndex = this.wrapper.children.length - 1 ;
+
+           var lastImgClone = childs[lastIndex].cloneNode(true);
+           var firstImgClone = childs[0].cloneNode(true);
+
+           this.wrapper.insertBefore(lastImgClone,childs[0]);
+           this.wrapper.appendChild(firstImgClone);
+
+           for (var i = 0; i < childs.length; i++) {
+                childs[i].style.width = this.cWidth + 'px';
+            }
+
+            this.wrapper.style.width = this.cWidth * childs.length + 'px';
+            this.wrapper.style.transform = `translateX(-${this.cWidth}px)`;
+       }
+
+
+   }
+   var  swiper = new Swiper(".swiper-container")
+
+
+
+    </script>
+
+
+</body>
+</html>

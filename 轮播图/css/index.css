@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swiper-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.swiper-container .swiper-wrapper {
+  display: flex;
+}
+
+.swiper-container .swiper-wrapper div {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.swiper-container .swiper-wrapper div img {
+  display: block;
+  width: 100%;
+}
+
+.swiper-container .swiper-pages {
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.swiper-container .swiper-pages span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.swiper-container .prev-btn, .swiper-container .next-btn {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  line-height: 50px;
+  background-color: aqua;
+  font-size: 40px;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 12;
+}
+
+.swiper-container .next-btn {
+  right: 0;
+}
