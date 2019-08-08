@@ -47,65 +47,79 @@
         document.body.appendChild(canvas);
 
         var ctx = canvas.getContext("2d");
-
-
-        ctx.translate(50, 450);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(0, -400);
-        ctx.moveTo(0, 0);
-        ctx.lineTo(400, 0);
-        ctx.stroke();
-
-
-        var max = JSON.parse(JSON.stringify(data)).sort((a,b)=>b.grade-a.grade)[0].grade;
-
-        var colorArr=data.map(function(){
+        var max = JSON.parse(JSON.stringify(data)).sort((a, b) => b.grade - a.grade)[0].grade;
+        var colorArr = data.map(function () {
             return randColor();
         })
 
+        ctx.translate(50, 450);
+        function draw() {
+            
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -400);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(400, 0);
+            ctx.stroke();
+        }
+
+        function huakedu() {
+
+            ctx.save();
+            ctx.textAlign = "end";
+            ctx.textBaseline = "middle";
+            for (var i = 50; i <= 400; i += 50) {
+                ctx.beginPath();
+                ctx.moveTo(-3, -i);
+                ctx.lineTo(3, -i);
+                ctx.stroke();
+                ctx.fillText((i / 400) * 100, -3, -i);
+            }
+            ctx.restore();
+
+        }
+
+        function xuanran() {
+
+
+            var margin = 400 / (data.length + 1);
+
 
             
+            ctx.textAlign = "center";
 
-        ctx.save();
-        ctx.textAlign="end";
-        ctx.textBaseline="middle";
-        for(var i = 50;i<=400;i+=50){
-            ctx.beginPath();
-            ctx.moveTo(-3,-i);
-            ctx.lineTo(3,-i);
-            ctx.stroke();
-            ctx.fillText((i/400)*100,-3,-i);
+            for (var i = 0; i < data.length; i++) {
+                ctx.save();
+                ctx.fillStyle = colorArr[i];
+                var h = data[i].grade / 100 * 400;
+                ctx.beginPath();
+                ctx.rect(margin * (i + 1) - 10, 0, 20, -h);
+                ctx.closePath();
+                ctx.fill();
+
+
+                ctx.fillText(data[i].name, margin * (i + 1), 15)
+                ctx.restore();
+            }
+
+
+           
+
+
+
         }
-        ctx.restore();
-
-
-
-        var margin = 400/(data.length+1);
-
-
-        ctx.save();
-        ctx.textAlign = "center";
-
-        for(var i = 0; i <data.length; i++){
-
-            ctx.fillStyle = colorArr[i];
-            var h = data[i].grade/100*400;
-            ctx.beginPath();
-            ctx.rect(margin*(i+1)-10,0,20,-h);
-            ctx.fill();
-
-
-            ctx.fillText(data[i].name,margin*(i+1),15)
-        }
-
-
-        ctx.restore();
-
-
+        draw();
+        xuanran();
+        huakedu();
         canvas.addEventListener("mousemove", function () {
             ctx.clearRect(-50, -450, 500, 500);
-            // draw(e);
+            draw();
+            xuanran();
+            huakedu();
         });
+
+
+
+
 
 
         function randColor() {
@@ -113,7 +127,7 @@
         }
 
 
-     
+
 
     </script>
 </body>
